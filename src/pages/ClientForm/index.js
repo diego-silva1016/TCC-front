@@ -1,12 +1,13 @@
 import { TextField, Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Main } from "./index.style";
 
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const Home = () => {
+const ClientForm = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const [cliente, setCliente] = useState({
     nome: "",
@@ -19,6 +20,7 @@ const Home = () => {
     logradouro: "",
     numero: "",
     complemento: "",
+    documento: ""
   });
 
   const findCep = () => {
@@ -48,6 +50,13 @@ const Home = () => {
       .then(() => navigate("/cliente"))
   };
 
+  useEffect(() => {
+    if(id){
+      axios
+      .get(`http://localhost:3333/client/${id}`)
+      .then(result => setCliente(result.data))
+    }
+  }, [id])
 
   return (
     <Main>
@@ -62,6 +71,7 @@ const Home = () => {
             type="text"
             variant="outlined"
             margin="normal"
+            value={cliente.nome}
             onChange={(e) => atualizarCliente(e.target.value, "nome")}
             sx={{ width: "40%", marginRight: "2.5%" }}
           />
@@ -70,14 +80,16 @@ const Home = () => {
             type="email"
             variant="outlined"
             margin="normal"
+            value={cliente.email}
             onChange={(e) => atualizarCliente(e.target.value, "email")}
             sx={{ width: "35%", marginRight: "2.5%" }}
           />
           <TextField
             label="CPF/CNPJ"
-            type="text"
+            type="number"
             variant="outlined"
-            margin="normal"
+            margin="normal"            
+            value={cliente.documento}
             onChange={(e) => atualizarCliente(e.target.value, "documento")}
             sx={{ width: "20%" }}
           />
@@ -88,6 +100,7 @@ const Home = () => {
             type="text"
             variant="outlined"
             margin="normal"
+            value={cliente.telefone}
             onChange={(e) => atualizarCliente(e.target.value, "telefone")}
             sx={{ width: "20%" }}
           />
@@ -185,4 +198,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ClientForm;
