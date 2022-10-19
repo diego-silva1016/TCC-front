@@ -44,9 +44,15 @@ const ClientForm = () => {
     }));
   };
 
-  const postClientes = () => {
+  const postCliente = () => {
     axios
       .post(`http://localhost:3333/client`, { cliente })
+      .then(() => navigate("/cliente"))
+  };
+
+  const updateCliente = () => {
+    axios
+      .put(`http://localhost:3333/client`, { cliente })
       .then(() => navigate("/cliente"))
   };
 
@@ -190,7 +196,7 @@ const ClientForm = () => {
         >
           Cancelar
         </Button>
-        <Button variant="contained" color="success" onClick={postClientes}>
+        <Button variant="contained" color="success" onClick={id ? updateCliente : postCliente}>
           Salvar
         </Button>
       </div>
