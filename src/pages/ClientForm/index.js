@@ -1,9 +1,10 @@
 import { TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Main } from "./index.style";
+import { LinkButton, Main } from "./index.style";
 
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { ArrowBackIos } from "@mui/icons-material";
 
 const ClientForm = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const ClientForm = () => {
     logradouro: "",
     numero: "",
     complemento: "",
-    documento: ""
+    documento: "",
   });
 
   const findCep = () => {
@@ -40,32 +41,37 @@ const ClientForm = () => {
   const atualizarCliente = (value, property) => {
     setCliente((prevState) => ({
       ...prevState,
-      [property]: value
+      [property]: value,
     }));
   };
 
   const postCliente = () => {
     axios
       .post(`http://localhost:3333/client`, { cliente })
-      .then(() => navigate("/cliente"))
+      .then(() => navigate("/cliente"));
   };
 
   const updateCliente = () => {
     axios
       .put(`http://localhost:3333/client`, { cliente })
-      .then(() => navigate("/cliente"))
+      .then(() => navigate("/cliente"));
   };
 
   useEffect(() => {
-    if(id){
+    if (id) {
       axios
-      .get(`http://localhost:3333/client/${id}`)
-      .then(result => setCliente(result.data))
+        .get(`http://localhost:3333/client/${id}`)
+        .then((result) => setCliente(result.data));
     }
-  }, [id])
+  }, [id]);
 
   return (
     <Main>
+      <LinkButton to='/cliente'>
+        <ArrowBackIos />
+        <span>Voltar</span>
+      </LinkButton>
+
       <h2>Novo cliente</h2>
 
       <div className="infos">
@@ -94,7 +100,7 @@ const ClientForm = () => {
             label="CPF/CNPJ"
             type="number"
             variant="outlined"
-            margin="normal"            
+            margin="normal"
             value={cliente.documento}
             onChange={(e) => atualizarCliente(e.target.value, "documento")}
             sx={{ width: "20%" }}
@@ -196,7 +202,11 @@ const ClientForm = () => {
         >
           Cancelar
         </Button>
-        <Button variant="contained" color="success" onClick={id ? updateCliente : postCliente}>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={id ? updateCliente : postCliente}
+        >
           Salvar
         </Button>
       </div>

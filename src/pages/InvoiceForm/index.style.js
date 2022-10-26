@@ -22,6 +22,7 @@ export const Main = styled.main`
     display: flex;
     flex-direction: column;
     margin-top: 24px;
+    margin-bottom: 24px;
 
     span {
       color: #95aac9;
