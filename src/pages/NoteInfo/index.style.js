@@ -16,12 +16,33 @@ export const Main = styled.main`
   flex-direction: column;
 
   padding: 24px;
-  color: #a3a3a3;
+  color: #00000;
+
+  .title {
+    margin-left: 2rem;
+    margin-top: 2rem;
+  }
 
   .infos {
     display: flex;
-    flex-direction: column;
     margin-top: 24px;
+    margin-left: 2rem;
+    justify-content: space-around;
+    font-size: 20px;
+
+    span {
+      color: #95aac9;
+      font-weight: bold;
+    }
+  }
+  }
+
+  .infosBottom {
+    display: flex;
+    margin-top: 24px;
+    margin-left: 2rem;
+    justify-content: space-around;
+    font-size: 20px;
 
     span {
       color: #95aac9;

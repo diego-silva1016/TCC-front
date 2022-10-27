@@ -26,18 +26,21 @@ const NoteInfo = () => {
         <ArrowBackIos />
         <span>Voltar</span>
       </LinkButton>
-
+      <div className="title">
       <h2>NOTA FISCAL: {nota.codigoNota}</h2>
       <h3>Status: {nota.status} </h3>
       <h3>Valor: R${nota.valor}</h3>
       <h3>Aliquota: {nota.aliquota}</h3>
       <p>Código do serviço: {nota.codigo}</p>
       <p>Descrição do serviço: {nota.descricao}</p>
+      </div>
       <div className="infos">
         <p>Nome do cliente: {nota.clientName}</p>
         <p>Documento do cliente: {nota.documento}</p>
         <p>Email do cliente: {nota.email}</p>
         <p>Telefone do cliente: {nota.telefone}</p>
+      </div>
+      <div className="infosBottom">  
         <p>CEP: {nota.cep}</p>
         <p>UF: {nota.uf}</p>
         <p>Cidade: {nota.cidade}</p>
