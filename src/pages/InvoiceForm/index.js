@@ -36,7 +36,7 @@ const InvoiceForm = () => {
   const postNota = () => {
     axios
       .post(`http://localhost:3333/invoice`, { invoice })
-      .then(() => navigate("/cliente"));
+      .then(() => navigate("/nota"));
   };
 
   const getClientes = useCallback(() => {
@@ -63,7 +63,7 @@ const InvoiceForm = () => {
         <span>Voltar</span>
       </LinkButton>
 
-      <h2>Novo cliente</h2>
+      <h2>Nova nota</h2>
 
       <div className="infos">
         <span>Dados da nota</span>

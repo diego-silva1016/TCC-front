@@ -35,22 +35,12 @@ import {
   
   const ListInvoices = () => {
     const [invoices, setInvoices] = useState([]);
-    //const [serviceIdToDelete, setServiceIdToDelete] = useState("");
   
     const getInvoices = useCallback(() => {
       axios
         .get(`http://localhost:3333/invoice`)
         .then(({ data }) => setInvoices(data));
     }, []);
-  
-    // const deleteService = () => {
-    //   axios
-    //     .delete(`http://localhost:3333/service/${serviceIdToDelete}`)
-    //     .then(() => {
-    //       setServiceIdToDelete("")
-    //       getServices()
-    //     });
-    // }
   
     useEffect(() => getInvoices(), [getInvoices]);
   
@@ -82,15 +72,13 @@ import {
                     key={invoice.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell align="center">{invoice.numero}</TableCell>
-                    <TableCell align="center">{invoice.cliente}</TableCell>
+                    <TableCell align="center">{invoice.codigo}</TableCell>
+                    <TableCell align="center">{invoice.clientName}</TableCell>
+                    <TableCell align="center">{invoice.status}</TableCell>
                     <TableCell align="center">
                       <Link>
                         <Edit />
                       </Link>
-                      {/* <DeleteOutline
-                        onClick={() => setServiceIdToDelete(service.id)}
-                      /> */}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -98,41 +86,6 @@ import {
             </Table>
           </TableContainer>
         </Main>
-        {/* <Modal
-          open={!!serviceIdToDelete}
-          onClose={() => setServiceIdToDelete("")}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Excluir cliente
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Deseja mesmo excluir esse cliente?
-            </Typography>
-  
-            <div style={{ marginLeft: "auto", marginTop: "16px" }}>
-              <Button
-                variant="contained"
-                style={{
-                  background: "gray",
-                  marginRight: "8px",
-                }}
-                onClick={() => setServiceIdToDelete("")}
-              >
-                Cancelar
-              </Button>
-              <Button
-                variant="contained"
-                color="error"    
-                onClick={deleteService}          
-              >
-                Excluir
-              </Button>
-            </div>
-          </Box>
-        </Modal> */}
       </>
     );
   };

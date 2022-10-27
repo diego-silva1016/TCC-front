@@ -79,7 +79,7 @@ const ClientForm = () => {
 
         <div>
           <TextField
-            label="Nome completo"
+            label="Nome completo*"
             type="text"
             variant="outlined"
             margin="normal"
@@ -88,7 +88,7 @@ const ClientForm = () => {
             sx={{ width: "40%", marginRight: "2.5%" }}
           />
           <TextField
-            label="Email"
+            label="Email*"
             type="email"
             variant="outlined"
             margin="normal"
@@ -97,7 +97,7 @@ const ClientForm = () => {
             sx={{ width: "35%", marginRight: "2.5%" }}
           />
           <TextField
-            label="CPF/CNPJ"
+            label="CPF/CNPJ*"
             type="number"
             variant="outlined"
             margin="normal"
@@ -108,7 +108,7 @@ const ClientForm = () => {
         </div>
         <div>
           <TextField
-            label="Telefone"
+            label="Telefone*"
             type="text"
             variant="outlined"
             margin="normal"
@@ -124,7 +124,7 @@ const ClientForm = () => {
 
         <div>
           <TextField
-            label="CEP"
+            label="CEP*"
             type="text"
             variant="outlined"
             margin="normal"
@@ -134,7 +134,7 @@ const ClientForm = () => {
             sx={{ width: "20%", marginRight: "2.5%" }}
           />
           <TextField
-            label="UF"
+            label="UF*"
             type="text"
             value={cliente.uf}
             onChange={(e) => atualizarCliente(e.target.value, "uf")}
@@ -144,7 +144,7 @@ const ClientForm = () => {
           />
 
           <TextField
-            label="Cidade"
+            label="Cidade*"
             type="text"
             value={cliente.cidade}
             onChange={(e) => atualizarCliente(e.target.value, "cidade")}
@@ -153,7 +153,7 @@ const ClientForm = () => {
             sx={{ width: "20%", marginRight: "2.5%" }}
           />
           <TextField
-            label="Bairro"
+            label="Bairro*"
             type="text"
             value={cliente.bairro}
             onChange={(e) => atualizarCliente(e.target.value, "bairro")}
@@ -164,7 +164,7 @@ const ClientForm = () => {
         </div>
         <div>
           <TextField
-            label="Logradouro"
+            label="Logradouro*"
             type="text"
             value={cliente.logradouro}
             onChange={(e) => atualizarCliente(e.target.value, "logradouro")}
