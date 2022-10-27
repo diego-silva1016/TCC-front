@@ -24,6 +24,18 @@ const ClientForm = () => {
     documento: "",
   });
 
+  function formataCPF(documento) {
+    documento = documento.replace(/[^\d]/g, "");
+    if (documento.length <= 11) {
+      return documento.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    }
+
+    return documento.replace(
+      /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+      "$1.$2.$3/$4-$5"
+    );
+  }
+
   const findCep = () => {
     axios
       .get(`https://viacep.com.br/ws/${cliente.cep}/json/`)
@@ -67,7 +79,7 @@ const ClientForm = () => {
 
   return (
     <Main>
-      <LinkButton to='/cliente'>
+      <LinkButton to="/cliente">
         <ArrowBackIos />
         <span>Voltar</span>
       </LinkButton>
@@ -98,11 +110,15 @@ const ClientForm = () => {
           />
           <TextField
             label="CPF/CNPJ*"
-            type="number"
+            type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.documento}
-            onChange={(e) => atualizarCliente(e.target.value, "documento")}
+            value={formataCPF(cliente.documento)}
+            onChange={(e) => {
+              var documento = e.target.value.replace(/[^\d]/g, "");
+              if (documento.length <= 14)
+                atualizarCliente(documento, "documento");
+            }}
             sx={{ width: "20%" }}
           />
         </div>
@@ -112,7 +128,10 @@ const ClientForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.telefone}
+            value={cliente.telefone.replace(
+              /^(\d{2})(\d{5})(\d{4})/,
+              "($1)$2-$3"
+            )}
             onChange={(e) => atualizarCliente(e.target.value, "telefone")}
             sx={{ width: "20%" }}
           />
