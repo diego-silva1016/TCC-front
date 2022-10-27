@@ -72,13 +72,13 @@ import {
                     key={invoice.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell align="center">{invoice.codigo}</TableCell>
+                    <TableCell align="center">{invoice.codigoNota}</TableCell>
                     <TableCell align="center">{invoice.clientName}</TableCell>
                     <TableCell align="center">{invoice.status}</TableCell>
                     <TableCell align="center">
-                      <Link>
-                        <Edit />
-                      </Link>
+                    <Link to={`/nota/${invoice.codigoNota}`}>
+                      <Edit />
+                    </Link>
                     </TableCell>
                   </TableRow>
                 ))}

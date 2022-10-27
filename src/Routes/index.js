@@ -9,6 +9,7 @@ import ListServices from "../pages/ListServices";
 import ServiceForm from "../pages/ServiceForm";
 import ListInvoices from "../pages/ListInvoices";
 import InvoiceForm from "../pages/InvoiceForm";
+import NoteInfo from "../pages/NoteInfo";
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
         <Route element={<Template component={<ListClientes />} />} path="/cliente" />
         <Route element={<Template component={<ListServices />} />} path="/servico" />
         <Route element={<Template component={<ListInvoices />} />} path="/nota" />
+        <Route element={<Template component={<NoteInfo />} />} path="/nota/:codigo" />
       </Routes>
     </BrowserRouter>
   );
