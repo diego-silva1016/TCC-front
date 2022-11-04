@@ -1,4 +1,4 @@
-import { Container, LoginContainer } from "./index.style.js";
+import { Container, LoginContainer, TitleContainer } from "./index.style.js";
 import { TextField, Button } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -12,8 +12,12 @@ const Login = () => {
 
   return (
     <Container>
+      <TitleContainer>
+        <h1>Easy</h1>
+        <p>Invoice</p>
+      </TitleContainer>
       <LoginContainer>
-        <h2>Login</h2>
+        <h1>Login</h1>
 
         <TextField
           label="Email"
