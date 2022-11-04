@@ -24,7 +24,7 @@ export const TitleContainer = styled.div`
         font-size: 8rem;
         color: azure;
     }
-    p {
+    i {
         font-family: arial;
         font-size: 10rem;
         color: azure;
@@ -40,6 +40,7 @@ export const LoginContainer = styled.div`
     width: 20rem;
     height: 20rem;
     background: #fff;
+    opacity: 90%;
 
     margin-left: auto;
     margin-right: 3rem;
@@ -51,6 +52,7 @@ export const LoginContainer = styled.div`
     box-shadow: 0px 0px 8px 2px #000000;
 
     h1 {
+        margin-top: 10px;
         font-family: arial;
         margin-bottom: 20px;
     }

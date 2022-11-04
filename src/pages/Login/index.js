@@ -14,7 +14,7 @@ const Login = () => {
     <Container>
       <TitleContainer>
         <h1>Easy</h1>
-        <p>Invoice</p>
+        <i>Invoice</i>
       </TitleContainer>
       <LoginContainer>
         <h1>Login</h1>
