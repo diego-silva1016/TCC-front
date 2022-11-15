@@ -1,16 +1,13 @@
 import {
-  Table,
-  TableContainer,
-  TableHead,
   TableRow,
   TableCell,
-  TableBody,
-  Paper,
   Button,
   Modal,
   Box,
   Typography,
 } from "@mui/material";
+
+import Table from "../../../components/Table";
 
 import { Edit, DeleteOutline } from "@mui/icons-material";
 import { Main } from "./index.style";
@@ -47,10 +44,10 @@ const ListClientes = () => {
     axios
       .delete(`http://localhost:3333/client/${clienteIdToDelete}`)
       .then(() => {
-        setClienteIdToDelete("")
-        getClientes()
+        setClienteIdToDelete("");
+        getClientes();
       });
-  }
+  };
 
   useEffect(() => getClientes(), [getClientes]);
 
@@ -66,40 +63,27 @@ const ListClientes = () => {
         >
           Cadastrar cliente
         </Button>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Nome</TableCell>
-                <TableCell align="center">Documento</TableCell>
-                <TableCell align="center">Telefone</TableCell>
-                <TableCell align="center">Email</TableCell>
-                <TableCell align="center">Ações</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {clientes.map((cliente) => (
-                <TableRow
-                  key={cliente.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center">{cliente.nome}</TableCell>
-                  <TableCell align="center">{cliente.documento}</TableCell>
-                  <TableCell align="center">{cliente.email}</TableCell>
-                  <TableCell align="center">{cliente.telefone}</TableCell>
-                  <TableCell align="center">
-                    <Link to={`/cliente/${cliente.id}`}>
-                      <Edit />
-                    </Link>
-                    <DeleteOutline
-                      onClick={() => setClienteIdToDelete(cliente.id)}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Table headers={["Nome", "Documento", "Telefone", "Email", "Ações"]}>
+          {clientes.map((cliente) => (
+            <TableRow
+              key={cliente.id}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell align="center">{cliente.nome}</TableCell>
+              <TableCell align="center">{cliente.documento}</TableCell>
+              <TableCell align="center">{cliente.email}</TableCell>
+              <TableCell align="center">{cliente.telefone}</TableCell>
+              <TableCell align="center">
+                <Link to={`/cliente/${cliente.id}`}>
+                  <Edit />
+                </Link>
+                <DeleteOutline
+                  onClick={() => setClienteIdToDelete(cliente.id)}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+        </Table>
       </Main>
       <Modal
         open={!!clienteIdToDelete}
@@ -126,11 +110,7 @@ const ListClientes = () => {
             >
               Cancelar
             </Button>
-            <Button
-              variant="contained"
-              color="error"    
-              onClick={deleteClient}          
-            >
+            <Button variant="contained" color="error" onClick={deleteClient}>
               Excluir
             </Button>
           </div>

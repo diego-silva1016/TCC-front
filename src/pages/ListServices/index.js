@@ -1,16 +1,13 @@
 import {
-  Table,
-  TableContainer,
-  TableHead,
   TableRow,
   TableCell,
-  TableBody,
-  Paper,
   Button,
   Modal,
   Box,
   Typography,
 } from "@mui/material";
+
+import Table from "../../components/Table";
 
 import { Edit, DeleteOutline } from "@mui/icons-material";
 import { Main } from "./index.style";
@@ -47,10 +44,10 @@ const ListServices = () => {
     axios
       .delete(`http://localhost:3333/service/${serviceIdToDelete}`)
       .then(() => {
-        setServiceIdToDelete("")
-        getServices()
+        setServiceIdToDelete("");
+        getServices();
       });
-  }
+  };
 
   useEffect(() => getServices(), [getServices]);
 
@@ -66,36 +63,25 @@ const ListServices = () => {
         >
           Cadastrar serviço
         </Button>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Codigo</TableCell>
-                <TableCell align="center">Descrição</TableCell>
-                <TableCell align="center">Ações</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {services.map((service) => (
-                <TableRow
-                  key={service.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center">{service.codigo}</TableCell>
-                  <TableCell align="center">{service.descricao}</TableCell>
-                  <TableCell align="center">
-                    <Link to={`/servico/${service.id}`}>
-                      <Edit />
-                    </Link>
-                    <DeleteOutline
-                      onClick={() => setServiceIdToDelete(service.id)}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Table headers={["Codigo", "Descrição", "Ações"]}>
+          {services.map((service) => (
+            <TableRow
+              key={service.id}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell align="center">{service.codigo}</TableCell>
+              <TableCell align="center">{service.descricao}</TableCell>
+              <TableCell align="center">
+                <Link to={`/servico/${service.id}`}>
+                  <Edit />
+                </Link>
+                <DeleteOutline
+                  onClick={() => setServiceIdToDelete(service.id)}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+        </Table>
       </Main>
       <Modal
         open={!!serviceIdToDelete}
@@ -122,11 +108,7 @@ const ListServices = () => {
             >
               Cancelar
             </Button>
-            <Button
-              variant="contained"
-              color="error"    
-              onClick={deleteService}          
-            >
+            <Button variant="contained" color="error" onClick={deleteService}>
               Excluir
             </Button>
           </div>

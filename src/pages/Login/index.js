@@ -7,7 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const signin = () => {
-    navigate("/cliente");
+    navigate("/nota");
   };
 
   return (
