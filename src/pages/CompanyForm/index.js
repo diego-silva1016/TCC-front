@@ -103,8 +103,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={empresa.nome}
-            onChange={(e) => atualizarEmpresa(e.target.value, "nome")}
+            value={empresa.nomeFantasia}
+            onChange={(e) => atualizarEmpresa(e.target.value, "nomeFantasia")}
             sx={{ width: "25%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -112,8 +112,8 @@ const CompanyForm = () => {
             type="email"
             variant="outlined"
             margin="normal"
-            value={empresa.email}
-            onChange={(e) => atualizarEmpresa(e.target.value, "email")}
+            value={empresa.razaoSocial}
+            onChange={(e) => atualizarEmpresa(e.target.value, "razaoSocial")}
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -148,11 +148,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={empresa.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
+            value={empresa.email}
+            onChange={(e) => atualizarEmpresa(e.target.value, "email")}
             sx={{ width: "25%", backgroundColor: "white", borderRadius: "4px"}}
           />
           <TextField
@@ -160,11 +157,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={empresa.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
+            value={empresa.inscricaoEstadual}
+            onChange={(e) => atualizarEmpresa(e.target.value, "inscricaoEstadual")}
             sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
           <TextField
@@ -172,10 +166,7 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={empresa.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
+            value={empresa.inscricaoMunicipal}
             onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
             sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
@@ -184,11 +175,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={empresa.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
+            value={empresa.codigoUfIbge}
+            onChange={(e) => atualizarEmpresa(e.target.value, "codigoUfIbge")}
             sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
           <TextField
@@ -196,11 +184,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={empresa.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
+            value={empresa.codigoCidadeIbge}
+            onChange={(e) => atualizarEmpresa(e.target.value, "codigoCidadeIbge")}
             sx={{ width: "16.5%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
         </div>
@@ -232,8 +217,8 @@ const CompanyForm = () => {
           <TextField
             label="País*"
             type="text"
-            value={empresa.logradouro}
-            onChange={(e) => atualizarEmpresa(e.target.value, "logradouro")}
+            value={empresa.pais}
+            onChange={(e) => atualizarEmpresa(e.target.value, "pais")}
             variant="outlined"
             margin="normal"
             sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -296,16 +281,16 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={empresa.cep}
-            onChange={(e) => atualizarEmpresa(e.target.value, "cep")}
+            value={empresa.codigoServMunicipal}
+            onChange={(e) => atualizarEmpresa(e.target.value, "codigoServMunicipal")}
             onBlur={findCep}
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
             label="Aliquotas*"
             type="text"
-            value={empresa.uf}
-            onChange={(e) => atualizarEmpresa(e.target.value, "uf")}
+            value={empresa.aliquotas}
+            onChange={(e) => atualizarEmpresa(e.target.value, "aliquotas")}
             variant="outlined"
             margin="normal"
             sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -313,8 +298,8 @@ const CompanyForm = () => {
           <TextField
             label="Descrição do serviço*"
             type="text"
-            value={empresa.logradouro}
-            onChange={(e) => atualizarEmpresa(e.target.value, "logradouro")}
+            value={empresa.descricao}
+            onChange={(e) => atualizarEmpresa(e.target.value, "descricao")}
             variant="outlined"
             margin="normal"
             sx={{ width: "65%", backgroundColor: "white", borderRadius: "4px" }}
