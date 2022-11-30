@@ -5,7 +5,7 @@ import {
   Typography
 } from "@mui/material";
 
-import { LinkButton } from "./index.style";
+import { LinkButton, Main } from "./index.style";
 
 
 const Template = ({ component }) => {
@@ -13,9 +13,9 @@ const Template = ({ component }) => {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, height: '60px' }}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar sx={{backgroundColor: '#505050'}}>
             <LinkButton active={url.includes('nota')} to="/nota">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Notas
@@ -34,7 +34,9 @@ const Template = ({ component }) => {
           </Toolbar>
         </AppBar>
       </Box>
+      <Main>
       {component}
+      </Main>
     </>
   );
 };

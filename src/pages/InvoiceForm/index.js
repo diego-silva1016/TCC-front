@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useCallback, useState, useEffect } from "react";
-import { LinkButton, Main } from "./index.style";
+import { LinkButton, Main, Span, H2, Div } from "./index.style";
 
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -57,19 +57,19 @@ const InvoiceForm = () => {
   }, [getClientes, getServices]);
 
   return (
-    <Main>
+    <>
       <LinkButton to="/cliente">
         <ArrowBackIos />
-        <span>Voltar</span>
+        <Span>Voltar</Span>
       </LinkButton>
 
-      <h2>Nova nota</h2>
+      <H2>Nova nota</H2>
 
       <div className="infos">
-        <span>Dados da nota</span>
+        <Span>Dados da nota</Span>
       </div>
-      <div>
-        <FormControl sx={{ width: "35%", marginRight: "2.5%" }}>
+      <Div className="content">
+        <FormControl sx={{ width: "35%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}>
           <InputLabel id="demo-multiple-checkbox-label">Cliente</InputLabel>
           <Select
             label="Cliente"
@@ -84,7 +84,7 @@ const InvoiceForm = () => {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ width: "37.5%",  marginRight: "2.5%"}}>
+        <FormControl sx={{ width: "37.5%",  marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}>
           <InputLabel id="demo-multiple-checkbox-label">Serviço</InputLabel>
           <Select
             label="Serviço"
@@ -108,7 +108,7 @@ const InvoiceForm = () => {
           margin="normal"
           value={invoice.aliquota}
           onChange={(e) => atualizarNota(e.target.value, "aliquota")}
-          sx={{ width: "10%", margin: 0,marginRight: "2.5%" }}
+          sx={{ width: "10%", margin: 0,marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px"}}
         />
 
         <TextField
@@ -118,9 +118,9 @@ const InvoiceForm = () => {
           margin="normal"
           value={invoice.valor}
           onChange={(e) => atualizarNota(e.target.value, "valor")}
-          sx={{ width: "10%", margin: 0 }}
+          sx={{ width: "10%", margin: 0, backgroundColor: "white", borderRadius: "4px" }}
         />
-      </div>
+      </Div>
       <div style={{ marginLeft: "auto", marginTop: "12px" }}>
         <Button
           component={Link}
@@ -134,7 +134,7 @@ const InvoiceForm = () => {
           Salvar
         </Button>
       </div>
-    </Main>
+    </>
   );
 };
 

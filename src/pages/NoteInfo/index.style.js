@@ -21,6 +21,7 @@ export const Main = styled.main`
   .title {
     margin-left: 2rem;
     margin-top: 2rem;
+    color: white;
   }
 
   .infos {
@@ -29,6 +30,7 @@ export const Main = styled.main`
     margin-left: 2rem;
     justify-content: space-around;
     font-size: 20px;
+    color: white;
 
     span {
       color: #95aac9;
@@ -43,6 +45,7 @@ export const Main = styled.main`
     margin-left: 2rem;
     justify-content: space-around;
     font-size: 20px;
+    color: white;
 
     span {
       color: #95aac9;

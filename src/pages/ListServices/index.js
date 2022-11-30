@@ -53,7 +53,6 @@ const ListServices = () => {
 
   return (
     <>
-      <Main>
         <Button
           component={Link}
           style={{ marginLeft: "auto", marginBottom: "12px" }}
@@ -82,7 +81,6 @@ const ListServices = () => {
             </TableRow>
           ))}
         </Table>
-      </Main>
       <Modal
         open={!!serviceIdToDelete}
         onClose={() => setServiceIdToDelete("")}

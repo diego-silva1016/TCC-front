@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowBackIos } from "@mui/icons-material";
 
-const ClientForm = () => {
+const CompanyForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -84,32 +84,31 @@ const ClientForm = () => {
         <Span>Voltar</Span>
       </LinkButton>
 
-      <H2>Novo cliente</H2>
+      <H2>Cadastro de Empresa</H2>
 
       <div className="infos">
-        <Span>Dados pessoais</Span>
-
+            <Span>Dados Empresariais</Span>
         <div>
           <TextField
-            label="Nome completo*"
+            label="Nome Fantasia*"
             type="text"
             variant="outlined"
             margin="normal"
             value={cliente.nome}
             onChange={(e) => atualizarCliente(e.target.value, "nome")}
-            sx={{ width: "40%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+            sx={{ width: "25%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
-            label="Email*"
+            label="Razão Social*"
             type="email"
             variant="outlined"
             margin="normal"
             value={cliente.email}
             onChange={(e) => atualizarCliente(e.target.value, "email")}
-            sx={{ width: "35%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+            sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
-            label="CPF/CNPJ*"
+            label="CNPJ*"
             type="text"
             variant="outlined"
             margin="normal"
@@ -119,10 +118,8 @@ const ClientForm = () => {
               if (documento.length <= 14)
                 atualizarCliente(documento, "documento");
             }}
-            sx={{ width: "20%", backgroundColor: "white", borderRadius: "4px" }}
+            sx={{ width: "27%", backgroundColor: "white", borderRadius: "4px" }}
           />
-        </div>
-        <div>
           <TextField
             label="Telefone*"
             type="text"
@@ -133,7 +130,69 @@ const ClientForm = () => {
               "($1)$2-$3"
             )}
             onChange={(e) => atualizarCliente(e.target.value, "telefone")}
-            sx={{ width: "20%", backgroundColor: "white", borderRadius: "4px" }}
+            sx={{ width: "20%", backgroundColor: "white", borderRadius: "4px", marginLeft:"2.3rem" }}
+          />
+        </div>
+        <div>
+          <TextField
+            label="Email*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={cliente.telefone.replace(
+              /^(\d{2})(\d{5})(\d{4})/,
+              "($1)$2-$3"
+            )}
+            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            sx={{ width: "25%", backgroundColor: "white", borderRadius: "4px"}}
+          />
+          <TextField
+            label="Inscrição Estadual*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={cliente.telefone.replace(
+              /^(\d{2})(\d{5})(\d{4})/,
+              "($1)$2-$3"
+            )}
+            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
+          />
+          <TextField
+            label="Inscrição Municipal*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={cliente.telefone.replace(
+              /^(\d{2})(\d{5})(\d{4})/,
+              "($1)$2-$3"
+            )}
+            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
+          />
+          <TextField
+            label="Código IBGE (UF)*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={cliente.telefone.replace(
+              /^(\d{2})(\d{5})(\d{4})/,
+              "($1)$2-$3"
+            )}
+            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
+          />
+          <TextField
+            label="Código IBGE (Cidade)*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={cliente.telefone.replace(
+              /^(\d{2})(\d{5})(\d{4})/,
+              "($1)$2-$3"
+            )}
+            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            sx={{ width: "16.5%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
         </div>
       </div>
@@ -161,7 +220,15 @@ const ClientForm = () => {
             margin="normal"
             sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
-
+          <TextField
+            label="País*"
+            type="text"
+            value={cliente.logradouro}
+            onChange={(e) => atualizarCliente(e.target.value, "logradouro")}
+            variant="outlined"
+            margin="normal"
+            sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+          />
           <TextField
             label="Cidade*"
             type="text"
@@ -178,7 +245,7 @@ const ClientForm = () => {
             onChange={(e) => atualizarCliente(e.target.value, "bairro")}
             variant="outlined"
             margin="normal"
-            sx={{ width: "42.5%", backgroundColor: "white", borderRadius: "4px" }}
+            sx={{ width: "30%", backgroundColor: "white", borderRadius: "4px" }}
           />
         </div>
         <div>
@@ -211,6 +278,40 @@ const ClientForm = () => {
           />
         </div>
       </div>
+      <div className="infos">
+        <Span>Serviço</Span>
+
+        <div>
+          <TextField
+            label="Código Serviço Municipal*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={cliente.cep}
+            onChange={(e) => atualizarCliente(e.target.value, "cep")}
+            onBlur={findCep}
+            sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+          />
+          <TextField
+            label="Aliquotas*"
+            type="text"
+            value={cliente.uf}
+            onChange={(e) => atualizarCliente(e.target.value, "uf")}
+            variant="outlined"
+            margin="normal"
+            sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+          />
+          <TextField
+            label="Descrição do serviço*"
+            type="text"
+            value={cliente.logradouro}
+            onChange={(e) => atualizarCliente(e.target.value, "logradouro")}
+            variant="outlined"
+            margin="normal"
+            sx={{ width: "65%", backgroundColor: "white", borderRadius: "4px" }}
+          />
+        </div>
+      </div>
 
       <div style={{ marginLeft: "auto", marginTop: "4px" }}>
         <Button
@@ -233,4 +334,4 @@ const ClientForm = () => {
   );
 };
 
-export default ClientForm;
+export default CompanyForm;

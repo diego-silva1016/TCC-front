@@ -10,6 +10,7 @@ import ServiceForm from "../pages/ServiceForm";
 import ListInvoices from "../pages/ListInvoices";
 import InvoiceForm from "../pages/InvoiceForm";
 import NoteInfo from "../pages/NoteInfo";
+import CompanyForm from "../pages/CompanyForm";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
         <Route element={<Template component={<ListServices />} />} path="/servico" />
         <Route element={<Template component={<ListInvoices />} />} path="/nota" />
         <Route element={<Template component={<NoteInfo />} />} path="/nota/:codigo" />
+        <Route element={<Template component={<CompanyForm />} />} path="/empresa/cadastro" />
       </Routes>
     </BrowserRouter>
   );

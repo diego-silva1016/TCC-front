@@ -10,7 +10,6 @@ import {
 import Table from "../../../components/Table";
 
 import { Edit, DeleteOutline } from "@mui/icons-material";
-import { Main } from "./index.style";
 import { useCallback, useEffect, useState } from "react";
 
 import axios from "axios";
@@ -53,38 +52,36 @@ const ListClientes = () => {
 
   return (
     <>
-      <Main>
-        <Button
-          component={Link}
-          style={{ marginLeft: "auto", marginBottom: "12px" }}
-          variant="contained"
-          color="primary"
-          to="/cliente/cadastro"
-        >
-          Cadastrar cliente
-        </Button>
-        <Table headers={["Nome", "Documento", "Telefone", "Email", "Ações"]}>
-          {clientes.map((cliente) => (
-            <TableRow
-              key={cliente.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell align="center">{cliente.nome}</TableCell>
-              <TableCell align="center">{cliente.documento}</TableCell>
-              <TableCell align="center">{cliente.email}</TableCell>
-              <TableCell align="center">{cliente.telefone}</TableCell>
-              <TableCell align="center">
-                <Link to={`/cliente/${cliente.id}`}>
-                  <Edit />
-                </Link>
-                <DeleteOutline
-                  onClick={() => setClienteIdToDelete(cliente.id)}
-                />
-              </TableCell>
-            </TableRow>
-          ))}
-        </Table>
-      </Main>
+      <Button
+        component={Link}
+        style={{ marginLeft: "auto", marginBottom: "12px" }}
+        variant="contained"
+        color="primary"
+        to="/cliente/cadastro"
+      >
+        Cadastrar cliente
+      </Button>
+      <Table headers={["Nome", "Documento", "Telefone", "Email", "Ações"]}>
+        {clientes.map((cliente) => (
+          <TableRow
+            key={cliente.id}
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+          >
+            <TableCell align="center">{cliente.nome}</TableCell>
+            <TableCell align="center">{cliente.documento}</TableCell>
+            <TableCell align="center">{cliente.email}</TableCell>
+            <TableCell align="center">{cliente.telefone}</TableCell>
+            <TableCell align="center">
+              <Link to={`/cliente/${cliente.id}`}>
+                <Edit />
+              </Link>
+              <DeleteOutline
+                onClick={() => setClienteIdToDelete(cliente.id)}
+              />
+            </TableCell>
+          </TableRow>
+        ))}
+      </Table>
       <Modal
         open={!!clienteIdToDelete}
         onClose={() => setClienteIdToDelete("")}

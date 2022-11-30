@@ -11,6 +11,20 @@ export const Header = styled.header`
   color: #fff;
 `;
 
+export const Span = styled.span`
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+export const H2 = styled.h2`
+  margin-top: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 2rem;
+`;
+
+export const Div = styled.div`
+  margin-top: 1rem;
+`;
+
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -33,7 +47,7 @@ export const Main = styled.main`
 
 export const LinkButton = styled(Link)`
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
   color: #1976d2;
 
   display: flex;
@@ -49,3 +63,5 @@ export const LinkButton = styled(Link)`
     opacity: 0.8;
   }
 `;
+
+

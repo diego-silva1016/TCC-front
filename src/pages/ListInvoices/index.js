@@ -26,10 +26,9 @@ import {
   
     return (
       <>
-        <Main>
           <Button
             component={Link}
-            style={{ marginLeft: "auto", marginBottom: "12px" }}
+            style={{ marginLeft: "auto", marginBottom: "12px"}}
             variant="contained"
             color="primary"
             to="/nota/cadastro"
@@ -55,7 +54,6 @@ import {
                   </TableRow>
                 ))}
           </Table>
-        </Main>
       </>
     );
   };

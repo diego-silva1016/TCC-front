@@ -1,6 +1,7 @@
 import { TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Main } from "./index.style";
+import { LinkButton, Main, Span, H2 } from "./index.style";
+import { ArrowBackIos } from "@mui/icons-material";
 
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -43,10 +44,14 @@ const ServiceForm = () => {
 
   return (
     <Main>
-      <h2>Novo serviço</h2>
+      <LinkButton to="/servico">
+        <ArrowBackIos />
+          <Span>Voltar</Span>
+      </LinkButton>
+      <H2>Novo serviço</H2>
 
       <div className="infos">
-        <span>Dados do serviço</span>
+        <Span>Dados do serviço</Span>
 
         <div>
           <TextField
@@ -56,7 +61,7 @@ const ServiceForm = () => {
             margin="normal"
             value={service.codigo}
             onChange={(e) => atualizarService(e.target.value, "codigo")}
-            sx={{ width: "20%", marginRight: "2.5%" }}
+            sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px"  }}
           />
           <TextField
             label="Descrição"
@@ -65,7 +70,7 @@ const ServiceForm = () => {
             margin="normal"
             value={service.descricao}
             onChange={(e) => atualizarService(e.target.value, "descricao")}
-            sx={{ width: "77.5%" }}
+            sx={{ width: "77.5%", backgroundColor: "white", borderRadius: "4px"  }}
           />
         </div>
         <div style={{ marginLeft: "auto", marginTop: "4px" }}>
