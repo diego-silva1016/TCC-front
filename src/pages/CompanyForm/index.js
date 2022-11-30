@@ -10,9 +10,18 @@ const CompanyForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [cliente, setCliente] = useState({
-    nome: "",
+  const [empresa, setEmpresa] = useState({
+    razaoSocial: "",
+    nomeFantasia: "",
     email: "",
+    inscricaoEstadual: "",
+    inscricaoMunicipal: "",
+    codigoUfIbge: "",
+    codigoCidadeIbge: "",
+    pais: "",
+    codigoServMunicipal: "",
+    descricao: "",
+    aliquotas: "",
     telefone: "",
     cep: "",
     uf: "",
@@ -38,9 +47,9 @@ const CompanyForm = () => {
 
   const findCep = () => {
     axios
-      .get(`https://viacep.com.br/ws/${cliente.cep}/json/`)
+      .get(`https://viacep.com.br/ws/${empresa.cep}/json/`)
       .then(({ data }) =>
-        setCliente((prevState) => ({
+        setEmpresa((prevState) => ({
           ...prevState,
           uf: data.uf,
           cidade: data.localidade,
@@ -50,22 +59,22 @@ const CompanyForm = () => {
       );
   };
 
-  const atualizarCliente = (value, property) => {
-    setCliente((prevState) => ({
+  const atualizarEmpresa = (value, property) => {
+    setEmpresa((prevState) => ({
       ...prevState,
       [property]: value,
     }));
   };
 
-  const postCliente = () => {
+  const postEmpresa = () => {
     axios
-      .post(`http://localhost:3333/client`, { cliente })
+      .post(`http://localhost:3333/client`, { cliente: empresa })
       .then(() => navigate("/cliente"));
   };
 
-  const updateCliente = () => {
+  const updateEmpresa = () => {
     axios
-      .put(`http://localhost:3333/client`, { cliente })
+      .put(`http://localhost:3333/client`, { cliente: empresa })
       .then(() => navigate("/cliente"));
   };
 
@@ -73,7 +82,7 @@ const CompanyForm = () => {
     if (id) {
       axios
         .get(`http://localhost:3333/client/${id}`)
-        .then((result) => setCliente(result.data));
+        .then((result) => setEmpresa(result.data));
     }
   }, [id]);
 
@@ -93,8 +102,6 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            //value={cliente.nome}
-            //onChange={(e) => atualizarCliente(e.target.value, "nome")}
             sx={{ width: "25%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -102,8 +109,6 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.email}
-            onChange={(e) => atualizarCliente(e.target.value, "email")}
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -111,12 +116,6 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={formataCPF(cliente.documento)}
-            onChange={(e) => {
-              var documento = e.target.value.replace(/[^\d]/g, "");
-              if (documento.length <= 14)
-                atualizarCliente(documento, "documento");
-            }}
             sx={{ width: "27%", backgroundColor: "white", borderRadius: "4px" }}
           />
         </div>
@@ -128,8 +127,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.nome}
-            onChange={(e) => atualizarCliente(e.target.value, "nome")}
+            value={empresa.nomeFantasia}
+            onChange={(e) => atualizarEmpresa(e.target.value, "nomeFantasia")}
             sx={{ width: "25%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -137,8 +136,8 @@ const CompanyForm = () => {
             type="email"
             variant="outlined"
             margin="normal"
-            value={cliente.email}
-            onChange={(e) => atualizarCliente(e.target.value, "email")}
+            value={empresa.razaoSocial}
+            onChange={(e) => atualizarEmpresa(e.target.value, "razaoSocial")}
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -146,11 +145,11 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={formataCPF(cliente.documento)}
+            value={formataCPF(empresa.documento)}
             onChange={(e) => {
               var documento = e.target.value.replace(/[^\d]/g, "");
               if (documento.length <= 14)
-                atualizarCliente(documento, "documento");
+                atualizarEmpresa(documento, "documento");
             }}
             sx={{ width: "27%", backgroundColor: "white", borderRadius: "4px" }}
           />
@@ -159,11 +158,11 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.telefone.replace(
+            value={empresa.telefone.replace(
               /^(\d{2})(\d{5})(\d{4})/,
               "($1)$2-$3"
             )}
-            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
             sx={{ width: "20%", backgroundColor: "white", borderRadius: "4px", marginLeft:"2.3rem" }}
           />
         </div>
@@ -173,23 +172,17 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
-            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px" }}
+            value={empresa.inscricaoEstadual}
+            onChange={(e) => atualizarEmpresa(e.target.value, "inscricaoEstadual")}
+            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
           <TextField
             label="Inscrição Municipal*"
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            value={empresa.inscricaoMunicipal}
+            onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
             sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
           <TextField
@@ -197,11 +190,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            value={empresa.codigoUfIbge}
+            onChange={(e) => atualizarEmpresa(e.target.value, "codigoUfIbge")}
             sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
           <TextField
@@ -209,11 +199,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
+            value={empresa.codigoCidadeIbge}
+            onChange={(e) => atualizarEmpresa(e.target.value, "codigoCidadeIbge")}
             sx={{ width: "16.5%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
         </div>
@@ -228,16 +215,16 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.cep}
-            onChange={(e) => atualizarCliente(e.target.value, "cep")}
+            value={empresa.cep}
+            onChange={(e) => atualizarEmpresa(e.target.value, "cep")}
             onBlur={findCep}
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
             label="UF*"
             type="text"
-            value={cliente.uf}
-            onChange={(e) => atualizarCliente(e.target.value, "uf")}
+            value={empresa.uf}
+            onChange={(e) => atualizarEmpresa(e.target.value, "uf")}
             variant="outlined"
             margin="normal"
             sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -245,8 +232,8 @@ const CompanyForm = () => {
           <TextField
             label="País*"
             type="text"
-            value={cliente.logradouro}
-            onChange={(e) => atualizarCliente(e.target.value, "logradouro")}
+            value={empresa.pais}
+            onChange={(e) => atualizarEmpresa(e.target.value, "pais")}
             variant="outlined"
             margin="normal"
             sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -254,8 +241,8 @@ const CompanyForm = () => {
           <TextField
             label="Cidade*"
             type="text"
-            value={cliente.cidade}
-            onChange={(e) => atualizarCliente(e.target.value, "cidade")}
+            value={empresa.cidade}
+            onChange={(e) => atualizarEmpresa(e.target.value, "cidade")}
             variant="outlined"
             margin="normal"
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -263,8 +250,8 @@ const CompanyForm = () => {
           <TextField
             label="Bairro*"
             type="text"
-            value={cliente.bairro}
-            onChange={(e) => atualizarCliente(e.target.value, "bairro")}
+            value={empresa.bairro}
+            onChange={(e) => atualizarEmpresa(e.target.value, "bairro")}
             variant="outlined"
             margin="normal"
             sx={{ width: "30%", backgroundColor: "white", borderRadius: "4px" }}
@@ -274,8 +261,8 @@ const CompanyForm = () => {
           <TextField
             label="Logradouro*"
             type="text"
-            value={cliente.logradouro}
-            onChange={(e) => atualizarCliente(e.target.value, "logradouro")}
+            value={empresa.logradouro}
+            onChange={(e) => atualizarEmpresa(e.target.value, "logradouro")}
             variant="outlined"
             margin="normal"
             sx={{ width: "32.5%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -283,8 +270,8 @@ const CompanyForm = () => {
           <TextField
             label="Número"
             type="text"
-            value={cliente.numero}
-            onChange={(e) => atualizarCliente(e.target.value, "numero")}
+            value={empresa.numero}
+            onChange={(e) => atualizarEmpresa(e.target.value, "numero")}
             variant="outlined"
             margin="normal"
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -292,8 +279,8 @@ const CompanyForm = () => {
           <TextField
             label="Complemento"
             type="text"
-            value={cliente.complemento}
-            onChange={(e) => atualizarCliente(e.target.value, "complemento")}
+            value={empresa.complemento}
+            onChange={(e) => atualizarEmpresa(e.target.value, "complemento")}
             variant="outlined"
             margin="normal"
             sx={{ width: "42.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -309,16 +296,16 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
-            value={cliente.cep}
-            onChange={(e) => atualizarCliente(e.target.value, "cep")}
+            value={empresa.codigoServMunicipal}
+            onChange={(e) => atualizarEmpresa(e.target.value, "codigoServMunicipal")}
             onBlur={findCep}
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
             label="Aliquotas*"
             type="text"
-            value={cliente.uf}
-            onChange={(e) => atualizarCliente(e.target.value, "uf")}
+            value={empresa.aliquotas}
+            onChange={(e) => atualizarEmpresa(e.target.value, "aliquotas")}
             variant="outlined"
             margin="normal"
             sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
@@ -326,8 +313,8 @@ const CompanyForm = () => {
           <TextField
             label="Descrição do serviço*"
             type="text"
-            value={cliente.logradouro}
-            onChange={(e) => atualizarCliente(e.target.value, "logradouro")}
+            value={empresa.descricao}
+            onChange={(e) => atualizarEmpresa(e.target.value, "descricao")}
             variant="outlined"
             margin="normal"
             sx={{ width: "65%", backgroundColor: "white", borderRadius: "4px" }}
@@ -347,7 +334,7 @@ const CompanyForm = () => {
         <Button
           variant="contained"
           color="success"
-          onClick={id ? updateCliente : postCliente}
+          onClick={id ? updateEmpresa : postEmpresa}
         >
           Salvar
         </Button>
