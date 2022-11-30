@@ -16,9 +16,9 @@ export const LinkButton = styled(Link)`
 export const Main = styled.main`
     display: flex;
     flex-direction: column;
-    background: #242222;
+    background: #e7e3e3;
 
     padding: 24px;
     color: #a3a3a3;
-    height: 88.4vh;
+    min-height: 88.4vh;
 `;

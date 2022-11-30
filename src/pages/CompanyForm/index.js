@@ -87,6 +87,40 @@ const CompanyForm = () => {
       <H2>Cadastro de Empresa</H2>
 
       <div className="infos">
+      <Span>Dados de acesso</Span><div>
+          <TextField
+            label="Email*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            //value={cliente.nome}
+            //onChange={(e) => atualizarCliente(e.target.value, "nome")}
+            sx={{ width: "25%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+          />
+          <TextField
+            label="Senha*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={cliente.email}
+            onChange={(e) => atualizarCliente(e.target.value, "email")}
+            sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+          />
+          <TextField
+            label="Confirmar senha*"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            value={formataCPF(cliente.documento)}
+            onChange={(e) => {
+              var documento = e.target.value.replace(/[^\d]/g, "");
+              if (documento.length <= 14)
+                atualizarCliente(documento, "documento");
+            }}
+            sx={{ width: "27%", backgroundColor: "white", borderRadius: "4px" }}
+          />
+        </div>
+
             <Span>Dados Empresariais</Span>
         <div>
           <TextField
@@ -135,18 +169,6 @@ const CompanyForm = () => {
         </div>
         <div>
           <TextField
-            label="Email*"
-            type="text"
-            variant="outlined"
-            margin="normal"
-            value={cliente.telefone.replace(
-              /^(\d{2})(\d{5})(\d{4})/,
-              "($1)$2-$3"
-            )}
-            onChange={(e) => atualizarCliente(e.target.value, "telefone")}
-            sx={{ width: "25%", backgroundColor: "white", borderRadius: "4px"}}
-          />
-          <TextField
             label="Inscrição Estadual*"
             type="text"
             variant="outlined"
@@ -156,7 +178,7 @@ const CompanyForm = () => {
               "($1)$2-$3"
             )}
             onChange={(e) => atualizarCliente(e.target.value, "telefone")}
-            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
+            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
             label="Inscrição Municipal*"

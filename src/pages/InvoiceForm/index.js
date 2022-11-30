@@ -84,7 +84,7 @@ const InvoiceForm = () => {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ width: "37.5%",  marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}>
+        <FormControl sx={{ width: "37.5%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}>
           <InputLabel id="demo-multiple-checkbox-label">Serviço</InputLabel>
           <Select
             label="Serviço"
@@ -108,7 +108,7 @@ const InvoiceForm = () => {
           margin="normal"
           value={invoice.aliquota}
           onChange={(e) => atualizarNota(e.target.value, "aliquota")}
-          sx={{ width: "10%", margin: 0,marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px"}}
+          sx={{ width: "10%", margin: 0, marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
         />
 
         <TextField
@@ -119,6 +119,26 @@ const InvoiceForm = () => {
           value={invoice.valor}
           onChange={(e) => atualizarNota(e.target.value, "valor")}
           sx={{ width: "10%", margin: 0, backgroundColor: "white", borderRadius: "4px" }}
+        />        
+      </Div>
+      <Div>
+      <TextField
+          label="Descontos"
+          type="text"
+          variant="outlined"
+          margin="normal"
+          value={0}
+          onChange={(e) => atualizarNota(e.target.value, "valor")}
+          sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
+        />
+         <TextField
+          label="Observações"
+          type="text"
+          variant="outlined"
+          margin="normal"
+          //value={}
+          onChange={(e) => atualizarNota(e.target.value, "valor")}
+          sx={{ width: "87.5%", backgroundColor: "white", borderRadius: "4px" }}
         />
       </Div>
       <div style={{ marginLeft: "auto", marginTop: "12px" }}>

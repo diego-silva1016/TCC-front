@@ -11,6 +11,7 @@ import ListInvoices from "../pages/ListInvoices";
 import InvoiceForm from "../pages/InvoiceForm";
 import NoteInfo from "../pages/NoteInfo";
 import CompanyForm from "../pages/CompanyForm";
+import SendCertificate from "../pages/SendCertificate";
 
 const Router = () => {
   return (
@@ -26,7 +27,8 @@ const Router = () => {
         <Route element={<Template component={<ListServices />} />} path="/servico" />
         <Route element={<Template component={<ListInvoices />} />} path="/nota" />
         <Route element={<Template component={<NoteInfo />} />} path="/nota/:codigo" />
-        <Route element={<Template component={<CompanyForm />} />} path="/empresa/cadastro" />
+        <Route element={<Template component={<SendCertificate />} />} path="/vincular-certificado" />
+        <Route element={<Template dontShowHeader={true} component={<CompanyForm />} />} path="/empresa/cadastro" />
       </Routes>
     </BrowserRouter>
   );
