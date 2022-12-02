@@ -1,7 +1,7 @@
 import { Container, LoginContainer, TitleContainer } from "./index.style.js";
 import { TextField, Button } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,13 +32,17 @@ const Login = () => {
           margin="normal"
         />
         <Button
-          style={{ width: "210px", marginTop: "8px" }}
+          style={{ width: "210px", marginTop: "8px", marginBottom: '12px' }}
           variant="contained"
           color="success"
           onClick={signin}
         >
           Entrar
         </Button>
+
+        <Link to="/empresa/cadastro" style={{ textDecoration: 'none', fontWeight: 'bold', color: '#2b1f6a' }}>
+          Cadastrar
+        </Link>
       </LoginContainer>
     </Container>
   );

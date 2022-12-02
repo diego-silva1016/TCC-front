@@ -16,12 +16,22 @@ export const Main = styled.main`
   flex-direction: column;
 
   padding: 24px;
-  color: #00000;
+  color: #000000;
 
   .title {
     margin-left: 2rem;
     margin-top: 2rem;
-    color: white;
+    color: #505050;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+
+    span {
+      margin-left: 8px;
+    }
   }
 
   .infos {
@@ -36,7 +46,6 @@ export const Main = styled.main`
       color: #95aac9;
       font-weight: bold;
     }
-  }
   }
 
   .infosBottom {

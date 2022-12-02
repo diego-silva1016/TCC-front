@@ -6,7 +6,7 @@ import {
 
   import Table from '../../components/Table';
   
-  import { Edit } from "@mui/icons-material";
+  import { Visibility  } from "@mui/icons-material";
   import { Main } from "./index.style";
   import { useCallback, useEffect, useState } from "react";
   
@@ -40,15 +40,15 @@ import {
           >
             {invoices.map((invoice) => (
                   <TableRow
-                    key={invoice.id}
+                    key={invoice.nfeId}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="center">{invoice.codigoNota}</TableCell>
                     <TableCell align="center">{invoice.clientName}</TableCell>
                     <TableCell align="center">{invoice.status}</TableCell>
                     <TableCell align="center">
-                    <Link to={`/nota/${invoice.codigoNota}`}>
-                      <Edit />
+                    <Link to={`/nota/${invoice.nfeId}`}>
+                      <Visibility />
                     </Link>
                     </TableCell>
                   </TableRow>

@@ -88,7 +88,7 @@ const CompanyForm = () => {
 
   return (
     <>
-      <LinkButton to="/cliente">
+      <LinkButton to="/">
         <ArrowBackIos />
         <Span>Voltar</Span>
       </LinkButton>
@@ -174,7 +174,7 @@ const CompanyForm = () => {
             margin="normal"
             value={empresa.inscricaoEstadual}
             onChange={(e) => atualizarEmpresa(e.target.value, "inscricaoEstadual")}
-            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
+            sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
             label="Inscrição Municipal*"

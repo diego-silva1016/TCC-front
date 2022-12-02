@@ -26,7 +26,7 @@ const Router = () => {
         <Route element={<Template component={<ListClientes />} />} path="/cliente" />
         <Route element={<Template component={<ListServices />} />} path="/servico" />
         <Route element={<Template component={<ListInvoices />} />} path="/nota" />
-        <Route element={<Template component={<NoteInfo />} />} path="/nota/:codigo" />
+        <Route element={<Template component={<NoteInfo />} />} path="/nota/:id" />
         <Route element={<Template component={<SendCertificate />} />} path="/vincular-certificado" />
         <Route element={<Template dontShowHeader={true} component={<CompanyForm />} />} path="/empresa/cadastro" />
       </Routes>

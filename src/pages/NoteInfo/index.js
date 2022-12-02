@@ -5,20 +5,27 @@ import { LinkButton, Main } from "./index.style";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowBackIos } from "@mui/icons-material";
+import PDF from '../../assets/NotaTeste.pdf'
 
 const NoteInfo = () => {
   const navigate = useNavigate();
-  const { codigo } = useParams();
+  const { id } = useParams();
 
   const [nota, setNota] = useState({});
 
   useEffect(() => {
-    if (codigo) {
+    if (id) {
       axios
-        .get(`http://localhost:3333/invoice/${codigo}`)
+        .get(`http://localhost:3333/invoice/${id}`)
         .then((result) => setNota(result.data));
     }
-  }, [codigo]);
+  }, [id]);
+
+  const cancelNote = () => {
+    axios
+      .put(`http://localhost:3333/invoice/${id}`)
+      .then((result) => setNota(result.data));
+  }
 
   return (
     <Main>
@@ -27,27 +34,70 @@ const NoteInfo = () => {
         <span>Voltar</span>
       </LinkButton>
       <div className="title">
-      <h2>NOTA FISCAL: {nota.codigoNota}</h2>
-      <h3>Status: {nota.status} </h3>
-      <h3>Valor: R${nota.valor}</h3>
-      <h3>Aliquota: {nota.aliquota}</h3>
-      <p>Código do serviço: {nota.codigo}</p>
-      <p>Descrição do serviço: {nota.descricao}</p>
+        <strong style={{ fontSize: '20px', marginBottom: '12px' }}>Dados gerais</strong>
+
+        <div className="flex" style={{ marginBottom: '12px' }}>
+          <strong>Chave da nota:</strong><span>15789456324785021478965238965478965423014587</span>
+          <strong style={{ marginLeft: '20px' }}>Status:</strong><span>{nota.status}</span>
+          <strong style={{ marginLeft: '20px' }}>Valor:</strong><span>R${nota.valor}</span>
+          <strong style={{ marginLeft: '20px' }}>Desconto:</strong><span>R${nota.desconto}</span>
+        </div>
+        <div className="flex" style={{ marginBottom: '32px' }}>
+          <strong>Observação:</strong><span>{nota.observacao ? nota.observacao : '-'}</span>
+        </div>
+
+        <strong style={{ fontSize: '20px', marginBottom: '12px' }}>Dados do serviço</strong>
+
+        <div className="flex" style={{ marginBottom: '32px' }}>
+          <strong>Código:</strong><span>{nota.codigo}</span>
+          <strong style={{ marginLeft: '20px' }}>Descrição:</strong><span>{nota.descricao}</span>
+          <strong style={{ marginLeft: '20px' }}>Aliquota:</strong><span>{nota.aliquota}%</span>
+        </div>
+
+        <strong style={{ fontSize: '20px', marginBottom: '12px' }}>Dados do cliente</strong>
+
+        <div className="flex" style={{ marginBottom: '12px' }}>
+          <strong>Nome:</strong><span>{nota.clientName}</span>
+          <strong style={{ marginLeft: '20px' }}>Documento:</strong><span>{nota.documento}</span>
+          <strong style={{ marginLeft: '20px' }}>Email:</strong><span>{nota.email}</span>
+          <strong style={{ marginLeft: '20px' }}>Telefone:</strong><span>{nota.telefone}</span>
+        </div>
+        <div className="flex">
+          <strong>CEP:</strong><span>{nota.cep}</span>
+          <strong style={{ marginLeft: '20px' }}>UF:</strong><span>{nota.uf}</span>
+          <strong style={{ marginLeft: '20px' }}>Cidade:</strong><span>{nota.cidade}</span>
+          <strong style={{ marginLeft: '20px' }}>Bairro:</strong><span>{nota.bairro}</span>
+          <strong style={{ marginLeft: '20px' }}>Logadouro:</strong><span>{nota.logadouro}</span>
+          <strong style={{ marginLeft: '20px' }}>Número:</strong><span>{nota.numero}</span>
+          <strong style={{ marginLeft: '20px' }}>Complemento:</strong><span>{nota.complemento ? nota.complemento : '-'}</span>
+        </div>
       </div>
-      <div className="infos">
-        <p>Nome do cliente: {nota.clientName}</p>
-        <p>Documento do cliente: {nota.documento}</p>
-        <p>Email do cliente: {nota.email}</p>
-        <p>Telefone do cliente: {nota.telefone}</p>
-      </div>
-      <div className="infosBottom">  
-        <p>CEP: {nota.cep}</p>
-        <p>UF: {nota.uf}</p>
-        <p>Cidade: {nota.cidade}</p>
-        <p>Bairro: {nota.bairro}</p>
-        <p>Logadouro: {nota.logadouro}</p>
-        <p>N°: {nota.numero}</p>
-        <p>Complemento: {nota.complemento}</p>
+
+      <div className="flex" style={{ justifyContent: 'center', marginTop: '40px' }}>
+        {nota.status !== "Cancelada" && <Button
+          variant="contained"
+          color='error'
+          onClick={cancelNote}
+        >
+          Cancelar
+        </Button>}
+
+        <Button
+          variant="contained"
+          color='primary'
+          style={{ marginLeft: '24px' }}
+        >
+          Download XML
+        </Button>
+        <a href={PDF} download='nota' style={{ textDecoration: 'none' }}>
+          <Button
+            variant="contained"
+            color='primary'
+            style={{ marginLeft: '24px' }}
+          >
+            Download PDF
+          </Button>
+        </a>
       </div>
     </Main>
   );

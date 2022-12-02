@@ -24,6 +24,8 @@ const InvoiceForm = () => {
     serviceId: "",
     aliquota: 2.4,
     valor: "",
+    desconto: 0,
+    observacao: ""
   });
 
   const atualizarNota = (value, property) => {
@@ -127,8 +129,8 @@ const InvoiceForm = () => {
           type="text"
           variant="outlined"
           margin="normal"
-          value={0}
-          onChange={(e) => atualizarNota(e.target.value, "valor")}
+          value={invoice.desconto}
+          onChange={(e) => atualizarNota(e.target.value, "desconto")}
           sx={{ width: "10%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
         />
          <TextField
@@ -136,8 +138,8 @@ const InvoiceForm = () => {
           type="text"
           variant="outlined"
           margin="normal"
-          //value={}
-          onChange={(e) => atualizarNota(e.target.value, "valor")}
+          value={invoice.observacao}
+          onChange={(e) => atualizarNota(e.target.value, "observacao")}
           sx={{ width: "87.5%", backgroundColor: "white", borderRadius: "4px" }}
         />
       </Div>
