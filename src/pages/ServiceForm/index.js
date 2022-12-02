@@ -13,6 +13,11 @@ const ServiceForm = () => {
   const [service, setService] = useState({
     codigo: "",
     descricao: "",
+    valorConfins: 0,
+    valorCsll: 0,
+    valorInss: 0,
+    valorIr: 0,
+    valorPis: 0
   });
 
   const atualizarService = (value, property) => {
@@ -73,10 +78,57 @@ const ServiceForm = () => {
             sx={{ width: "77.5%", backgroundColor: "white", borderRadius: "4px"  }}
           />
         </div>
+        <div>
+          <TextField
+            label="Valor confins"
+            type="number"
+            variant="outlined"
+            margin="normal"
+            value={service.valorConfins}
+            onChange={(e) => atualizarService(e.target.value, "valorConfins")}
+            sx={{ width: "18%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px"  }}
+          />
+          <TextField
+            label="Valor csll"
+            type="number"
+            variant="outlined"
+            margin="normal"
+            value={service.valorCsll}
+            onChange={(e) => atualizarService(e.target.value, "valorCsll")}
+            sx={{ width: "18%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px"  }}
+          />
+          <TextField
+            label="Valor inss"
+            type="number"
+            variant="outlined"
+            margin="normal"
+            value={service.valorInss}
+            onChange={(e) => atualizarService(e.target.value, "valorInss")}
+            sx={{ width: "18%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px"  }}
+          />
+          <TextField
+            label="Valor ir"
+            type="number"
+            variant="outlined"
+            margin="normal"
+            value={service.valorIr}
+            onChange={(e) => atualizarService(e.target.value, "valorIr")}
+            sx={{ width: "18%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px"  }}
+          />
+          <TextField
+            label="Valor pis"
+            type="number"
+            variant="outlined"
+            margin="normal"
+            value={service.valorPis}
+            onChange={(e) => atualizarService(e.target.value, "valorPis")}
+            sx={{ width: "18%", backgroundColor: "white", borderRadius: "4px"  }}
+          />
+        </div>
         <div style={{ marginLeft: "auto", marginTop: "4px" }}>
             <Button
               component={Link}
-              to="/cliente"
+              to="/servico"
               variant="contained"
               style={{ background: "gray", marginRight: "8px" }}
             >
