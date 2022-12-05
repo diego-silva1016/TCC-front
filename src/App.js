@@ -1,8 +1,11 @@
+import { LoginContextProvider } from "./contexts/LoginContext/index.js";
 import Router from "./Routes/index.js";
 
 function App() {
   return (
-    <Router />
+    <LoginContextProvider>
+      <Router />
+    </LoginContextProvider>
   );
 }
 

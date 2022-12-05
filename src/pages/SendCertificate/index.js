@@ -1,12 +1,22 @@
 import { TextField, Button } from "@mui/material";
-import { useEffect, useState } from "react";
-import { LinkButton, Main, Span, H2 } from "./index.style";
-import { ArrowBackIos } from "@mui/icons-material";
-
-import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Main, H2 } from "./index.style";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/LoginContext";
 
 const SendCertificate = () => {
+    const navigate = useNavigate()
+    const { setCertificate } = useAuth()
+
+    const sendCertificate = async () => {
+        try{
+            await setCertificate()
+
+            navigate('/nota')
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
     return (
         <Main>
             <H2>Vincular certificado digital</H2>
@@ -35,6 +45,7 @@ const SendCertificate = () => {
                 <Button
                     variant="contained"
                     color="success"
+                    onClick={sendCertificate}
                 >
                     Enviar
                 </Button>
