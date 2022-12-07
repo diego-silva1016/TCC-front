@@ -2,15 +2,17 @@ import { TextField, Button } from "@mui/material";
 import { Main, H2 } from "./index.style";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/LoginContext";
+import { useToast } from "../../contexts/ToastContext";
 
 const SendCertificate = () => {
     const navigate = useNavigate()
     const { setCertificate } = useAuth()
+    const { toastOpenSuccess } = useToast()
 
     const sendCertificate = async () => {
         try{
             await setCertificate()
-
+            toastOpenSuccess("Certificado vinculado com sucesso.")
             navigate('/nota')
         } catch(e) {
             console.log(e)

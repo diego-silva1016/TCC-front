@@ -1,10 +1,13 @@
 import { LoginContextProvider } from "./contexts/LoginContext/index.js";
+import { ToastContextProvider } from "./contexts/ToastContext/index.js";
 import Router from "./Routes/index.js";
 
 function App() {
   return (
     <LoginContextProvider>
-      <Router />
+      <ToastContextProvider>
+        <Router />
+      </ToastContextProvider>
     </LoginContextProvider>
   );
 }

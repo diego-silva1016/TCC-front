@@ -14,6 +14,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useToast } from "../../../contexts/ToastContext";
+import EmptyMessage from "../../../components/EmptyMessage";
 
 const style = {
   position: "absolute",
@@ -22,7 +24,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "1px solid #a3a3a3",
+  borderRadius: "4px",
   boxShadow: 24,
   p: 4,
   display: "flex",
@@ -32,6 +35,8 @@ const style = {
 const ListClientes = () => {
   const [clientes, setClientes] = useState([]);
   const [clienteIdToDelete, setClienteIdToDelete] = useState("");
+
+  const { toastOpenSuccess } = useToast()
 
   const getClientes = useCallback(() => {
     axios
@@ -44,9 +49,22 @@ const ListClientes = () => {
       .delete(`http://localhost:3333/client/${clienteIdToDelete}`)
       .then(() => {
         setClienteIdToDelete("");
+        toastOpenSuccess("Cliente deletado com sucesso.")
         getClientes();
       });
   };
+
+  function formataDocumento(documento) {
+    documento = documento.replace(/[^\d]/g, "");
+    if (documento.length <= 11) {
+      return documento.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    }
+
+    return documento.replace(
+      /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+      "$1.$2.$3/$4-$5"
+    );
+  }
 
   useEffect(() => getClientes(), [getClientes]);
 
@@ -68,20 +86,25 @@ const ListClientes = () => {
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
             <TableCell align="center">{cliente.nome}</TableCell>
-            <TableCell align="center">{cliente.documento}</TableCell>
+            <TableCell align="center">{formataDocumento(cliente.documento)}</TableCell>            
+            <TableCell align="center">{cliente.telefone.replace(
+              /^(\d{2})(\d{5})(\d{4})/,
+              "($1)$2-$3"
+            )}</TableCell>
             <TableCell align="center">{cliente.email}</TableCell>
-            <TableCell align="center">{cliente.telefone}</TableCell>
             <TableCell align="center">
               <Link to={`/cliente/${cliente.id}`}>
-                <Edit />
+                <Edit style={{color: "#a3a3a3"}}/>
               </Link>
               <DeleteOutline
+                style={{color: "#a3a3a3", cursor: "pointer"}}
                 onClick={() => setClienteIdToDelete(cliente.id)}
               />
             </TableCell>
           </TableRow>
         ))}
       </Table>
+      {!clientes.length && <EmptyMessage message="Nenhum cliente foi cadastrado."/>}
       <Modal
         open={!!clienteIdToDelete}
         onClose={() => setClienteIdToDelete("")}

@@ -1,19 +1,21 @@
 import { TextField, Button } from "@mui/material";
-import { useEffect, useState } from "react";
-import { LinkButton, Main, Span, H2 } from "./index.style";
+import { useState } from "react";
+import { LinkButton, Span, H2 } from "./index.style";
 
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowBackIos } from "@mui/icons-material";
+import { useToast } from "../../contexts/ToastContext";
 
 const CompanyForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { toastOpenSuccess } = useToast()
 
   const [empresa, setEmpresa] = useState({
     razaoSocial: "",
     nomeFantasia: "",
     email: "",
+    password: "",
     inscricaoEstadual: "",
     inscricaoMunicipal: "",
     codigoUfIbge: "",
@@ -68,23 +70,12 @@ const CompanyForm = () => {
 
   const postEmpresa = () => {
     axios
-      .post(`http://localhost:3333/client`, { cliente: empresa })
-      .then(() => navigate("/cliente"));
+      .post(`http://localhost:3333/company`, { company: empresa })
+      .then(() => {
+        navigate("/")
+        toastOpenSuccess("Empresa cadastrada com sucesso.")
+      });
   };
-
-  const updateEmpresa = () => {
-    axios
-      .put(`http://localhost:3333/client`, { cliente: empresa })
-      .then(() => navigate("/cliente"));
-  };
-
-  useEffect(() => {
-    if (id) {
-      axios
-        .get(`http://localhost:3333/client/${id}`)
-        .then((result) => setEmpresa(result.data));
-    }
-  }, [id]);
 
   return (
     <>
@@ -102,6 +93,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
+            value={empresa.email}
+            onChange={(e) => atualizarEmpresa(e.target.value, "email")}
             sx={{ width: "25%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -109,6 +102,8 @@ const CompanyForm = () => {
             type="text"
             variant="outlined"
             margin="normal"
+            value={empresa.password}
+            onChange={(e) => atualizarEmpresa(e.target.value, "password")}
             sx={{ width: "20%", marginRight: "2.5%", backgroundColor: "white", borderRadius: "4px" }}
           />
           <TextField
@@ -325,7 +320,7 @@ const CompanyForm = () => {
       <div style={{ marginLeft: "auto", marginTop: "4px" }}>
         <Button
           component={Link}
-          to="/cliente"
+          to="/"
           variant="contained"
           style={{ background: "gray", marginRight: "8px" }}
         >
@@ -334,7 +329,7 @@ const CompanyForm = () => {
         <Button
           variant="contained"
           color="success"
-          onClick={id ? updateEmpresa : postEmpresa}
+          onClick={postEmpresa}
         >
           Salvar
         </Button>

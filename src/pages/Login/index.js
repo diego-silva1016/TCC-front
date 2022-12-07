@@ -4,10 +4,12 @@ import { TextField, Button } from "@mui/material";
 
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from '../../contexts/LoginContext/index.js';
+import { useToast } from '../../contexts/ToastContext/index.js';
 
 const Login = () => {
   const navigate = useNavigate();
   const {login} = useAuth()
+  const { toastOpenError } = useToast()
   const [params, setParams] = useState({
     email: '',
     password: ''
@@ -18,7 +20,7 @@ const Login = () => {
       await login(params)
       navigate("/nota")
     } catch(e){
-      console.log(e)
+      toastOpenError("Credenciais inválidas.")
     }
   };
 
@@ -66,6 +68,7 @@ const Login = () => {
           Cadastrar
         </Link>
       </LoginContainer>
+      
     </Container>
   );
 };

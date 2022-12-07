@@ -12,10 +12,11 @@ import { LinkButton, Main, Span, H2, Div } from "./index.style";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowBackIos } from "@mui/icons-material";
+import { useToast } from "../../contexts/ToastContext";
 
 const InvoiceForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { toastOpenSuccess } = useToast()
 
   const [clientes, setClientes] = useState([]);
   const [servicos, setServicos] = useState([]);
@@ -38,7 +39,10 @@ const InvoiceForm = () => {
   const postNota = () => {
     axios
       .post(`http://localhost:3333/invoice`, { invoice })
-      .then(() => navigate("/nota"));
+      .then(() => {
+        toastOpenSuccess("Solicitação de emissão de nota enviada com sucesso.")
+        navigate("/nota")
+      });
   };
 
   const getClientes = useCallback(() => {

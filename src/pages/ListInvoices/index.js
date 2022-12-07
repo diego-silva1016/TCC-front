@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/LoginContext";
+import EmptyMessage from "../../components/EmptyMessage";
 
 const style = {
   position: 'absolute',
@@ -16,8 +17,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
+  border: "1px solid #a3a3a3",
+  borderRadius: "4px",
   p: 4,
   display: 'flex',
   flexDirection: 'column'
@@ -35,6 +36,18 @@ const ListInvoices = () => {
   }, []);
 
   useEffect(() => getInvoices(), [getInvoices]);
+
+  function formataDocumento(documento) {
+    documento = documento.replace(/[^\d]/g, "");
+    if (documento.length <= 11) {
+      return documento.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    }
+
+    return documento.replace(
+      /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
+      "$1.$2.$3/$4-$5"
+    );
+  }
 
   return (
     <>
@@ -58,23 +71,26 @@ const ListInvoices = () => {
           Emitir nota
         </Button>
       )}
-      <Table headers={["Número da nota", "Cliente", "Status", "Ações"]}>
+
+      <Table headers={["Número da nota", "Cliente", "Serviço", "Status", "Ações"]}>
         {invoices.map((invoice) => (
           <TableRow
             key={invoice.nfeId}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
             <TableCell align="center">{invoice.codigoNota}</TableCell>
-            <TableCell align="center">{invoice.clientName}</TableCell>
+            <TableCell align="center">{invoice.clientName} - {formataDocumento(invoice.documento)}</TableCell>
+            <TableCell align="center">{invoice.descricaoServico}</TableCell>
             <TableCell align="center">{invoice.status}</TableCell>
             <TableCell align="center">
               <Link to={`/nota/${invoice.nfeId}`}>
-                <Visibility />
+                <Visibility style={{ color: "#a3a3a3" }} />
               </Link>
             </TableCell>
           </TableRow>
         ))}
       </Table>
+      {!invoices.length && <EmptyMessage message="Nenhuma nota foi emitida."/>}
       <Modal
         open={isOpen}
         onClose={() => setIsOpen(false)}
@@ -82,19 +98,19 @@ const ListInvoices = () => {
         aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
-          <h2 style={{marginBottom: '20px'}}>Vincular certificado</h2>
+          <h2 style={{ marginBottom: '20px' }}>Vincular certificado</h2>
           <p id="parent-modal-description">
             Você deve vincular um certificado digital à sua empresa para emitir nota.
           </p>
           <Button
-          component={Link}
-          style={{ marginLeft: "auto", marginTop: "12px" }}
-          variant="contained"
-          color="primary"
-          to="/vincular-certificado"
-        >
-          Ir para vincular certificado
-        </Button>
+            component={Link}
+            style={{ marginLeft: "auto", marginTop: "12px" }}
+            variant="contained"
+            color="primary"
+            to="/vincular-certificado"
+          >
+            Ir para vincular certificado
+          </Button>
         </Box>
       </Modal>
     </>

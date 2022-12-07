@@ -54,7 +54,9 @@ const Template = ({ component, dontShowHeader = false }) => {
                 )}
               </>
             )}
+            {!dontShowHeader &&
              <Button style={{marginLeft: 'auto'}} onClick={signOut}><Logout style={{color: '#fff'}}/></Button>
+            }
           </Toolbar>
          
         </AppBar>

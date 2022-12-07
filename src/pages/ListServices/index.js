@@ -15,6 +15,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useToast } from "../../contexts/ToastContext";
+import EmptyMessage from "../../components/EmptyMessage";
 
 const style = {
   position: "absolute",
@@ -23,7 +25,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "1px solid #a3a3a3",
+  borderRadius: "4px",
   boxShadow: 24,
   p: 4,
   display: "flex",
@@ -33,6 +36,9 @@ const style = {
 const ListServices = () => {
   const [services, setServices] = useState([]);
   const [serviceIdToDelete, setServiceIdToDelete] = useState("");
+
+  const { toastOpenSuccess } = useToast()
+
 
   const getServices = useCallback(() => {
     axios
@@ -45,6 +51,7 @@ const ListServices = () => {
       .delete(`http://localhost:3333/service/${serviceIdToDelete}`)
       .then(() => {
         setServiceIdToDelete("");
+        toastOpenSuccess("Serviço deletado com sucesso.")
         getServices();
       });
   };
@@ -72,15 +79,17 @@ const ListServices = () => {
               <TableCell align="center">{service.descricao}</TableCell>
               <TableCell align="center">
                 <Link to={`/servico/${service.id}`}>
-                  <Edit />
+                  <Edit style={{color: "#a3a3a3"}}/>
                 </Link>
                 <DeleteOutline
+                  style={{color: "#a3a3a3", cursor: "pointer"}}
                   onClick={() => setServiceIdToDelete(service.id)}
                 />
               </TableCell>
             </TableRow>
           ))}
         </Table>
+        {!services.length && <EmptyMessage message="Nenhum serviço foi cadastrado."/>}
       <Modal
         open={!!serviceIdToDelete}
         onClose={() => setServiceIdToDelete("")}

@@ -6,9 +6,10 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowBackIos } from "@mui/icons-material";
 import PDF from '../../assets/NotaTeste.pdf'
+import { useToast } from "../../contexts/ToastContext";
 
 const NoteInfo = () => {
-  const navigate = useNavigate();
+  const { toastOpenSuccess } = useToast()
   const { id } = useParams();
 
   const [nota, setNota] = useState({});
@@ -24,7 +25,10 @@ const NoteInfo = () => {
   const cancelNote = () => {
     axios
       .put(`http://localhost:3333/invoice/${id}`)
-      .then((result) => setNota(result.data));
+      .then((result) => {
+        toastOpenSuccess("Nota cancelada com sucesso.")
+        setNota(result.data)
+      });
   }
 
   return (

@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
+import PrivateRoute from './PrivateRoute'
+
 import Login from "../pages/Login";
 import ClientForm from "../pages/ClientForm";
 import ListClientes from "../pages/Clientes/ListClientes";
@@ -18,16 +20,16 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Login />} path="/" />
-        <Route element={<Template component={<ClientForm />} />} path="/cliente/cadastro" />
-        <Route element={<Template component={<ClientForm />} />} path="/cliente/:id" />
-        <Route element={<Template component={<ServiceForm />} />} path="/servico/cadastro" />
-        <Route element={<Template component={<ServiceForm />} />} path="/servico/:id" />
-        <Route element={<Template component={<InvoiceForm />} />} path="/nota/cadastro" />
-        <Route element={<Template component={<ListClientes />} />} path="/cliente" />
-        <Route element={<Template component={<ListServices />} />} path="/servico" />
-        <Route element={<Template component={<ListInvoices />} />} path="/nota" />
-        <Route element={<Template component={<NoteInfo />} />} path="/nota/:id" />
-        <Route element={<Template component={<SendCertificate />} />} path="/vincular-certificado" />
+        <Route element={<PrivateRoute><Template component={<ClientForm />} /></PrivateRoute>} path="/cliente/cadastro" />
+        <Route element={<PrivateRoute><Template component={<ClientForm />} /></PrivateRoute>} path="/cliente/:id" />
+        <Route element={<PrivateRoute><Template component={<ServiceForm />} /></PrivateRoute>} path="/servico/cadastro" />
+        <Route element={<PrivateRoute><Template component={<ServiceForm />} /></PrivateRoute>} path="/servico/:id" />
+        <Route element={<PrivateRoute><Template component={<InvoiceForm />} /></PrivateRoute>} path="/nota/cadastro" />
+        <Route element={<PrivateRoute><Template component={<ListClientes />} /></PrivateRoute>} path="/cliente" />
+        <Route element={<PrivateRoute><Template component={<ListServices />} /></PrivateRoute>} path="/servico" />
+        <Route element={<PrivateRoute><Template component={<ListInvoices />} /></PrivateRoute>} path="/nota" />
+        <Route element={<PrivateRoute><Template component={<NoteInfo />} /></PrivateRoute>} path="/nota/:id" />
+        <Route element={<PrivateRoute><Template component={<SendCertificate />} /></PrivateRoute>} path="/vincular-certificado" />
         <Route element={<Template dontShowHeader={true} component={<CompanyForm />} />} path="/empresa/cadastro" />
       </Routes>
     </BrowserRouter>
