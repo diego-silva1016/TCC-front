@@ -37,9 +37,6 @@ const CompanyForm = () => {
 
   function formataCPF(documento) {
     documento = documento.replace(/[^\d]/g, "");
-    if (documento.length <= 11) {
-      return documento.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-    }
 
     return documento.replace(
       /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,
@@ -177,7 +174,7 @@ const CompanyForm = () => {
             variant="outlined"
             margin="normal"
             value={empresa.inscricaoMunicipal}
-            onChange={(e) => atualizarEmpresa(e.target.value, "telefone")}
+            onChange={(e) => atualizarEmpresa(e.target.value, "inscricaoMunicipal")}
             sx={{ width: "16%", backgroundColor: "white", borderRadius: "4px", marginLeft: "2rem" }}
           />
           <TextField

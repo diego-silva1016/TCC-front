@@ -72,8 +72,8 @@ const ListInvoices = () => {
         </Button>
       )}
 
-      <Table headers={["Número da nota", "Cliente", "Serviço", "Status", "Ações"]}>
-        {invoices.map((invoice) => (
+      <Table headers={["Número da nota", "Cliente", "Serviço", "Status", "Data de emissão", "Ações"]}>
+        {invoices.sort((a, b) => new Date(b.dataEmissao) - new Date(a.dataEmissao)).map((invoice) => (
           <TableRow
             key={invoice.nfeId}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -82,6 +82,14 @@ const ListInvoices = () => {
             <TableCell align="center">{invoice.clientName} - {formataDocumento(invoice.documento)}</TableCell>
             <TableCell align="center">{invoice.descricaoServico}</TableCell>
             <TableCell align="center">{invoice.status}</TableCell>
+            <TableCell align="center">{new Date(invoice.dataEmissao).toLocaleDateString('pt-BR', {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
+              second: 'numeric',
+            })}</TableCell>
             <TableCell align="center">
               <Link to={`/nota/${invoice.nfeId}`}>
                 <Visibility style={{ color: "#a3a3a3" }} />
@@ -90,7 +98,7 @@ const ListInvoices = () => {
           </TableRow>
         ))}
       </Table>
-      {!invoices.length && <EmptyMessage message="Nenhuma nota foi emitida."/>}
+      {!invoices.length && <EmptyMessage message="Nenhuma nota foi emitida." />}
       <Modal
         open={isOpen}
         onClose={() => setIsOpen(false)}

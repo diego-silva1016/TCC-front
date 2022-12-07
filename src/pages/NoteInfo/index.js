@@ -43,6 +43,14 @@ const NoteInfo = () => {
         <div className="flex" style={{ marginBottom: '12px' }}>
           <strong>Chave da nota:</strong><span>15789456324785021478965238965478965423014587</span>
           <strong style={{ marginLeft: '20px' }}>Status:</strong><span>{nota.status}</span>
+          <strong style={{ marginLeft: '20px' }}>Data de emissão:</strong><span>{new Date(nota.dataEmissao).toLocaleDateString('pt-BR', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+          })}</span>
           <strong style={{ marginLeft: '20px' }}>Valor:</strong><span>R${nota.valor}</span>
           <strong style={{ marginLeft: '20px' }}>Desconto:</strong><span>R${nota.desconto}</span>
         </div>
@@ -71,7 +79,7 @@ const NoteInfo = () => {
           <strong style={{ marginLeft: '20px' }}>UF:</strong><span>{nota.uf}</span>
           <strong style={{ marginLeft: '20px' }}>Cidade:</strong><span>{nota.cidade}</span>
           <strong style={{ marginLeft: '20px' }}>Bairro:</strong><span>{nota.bairro}</span>
-          <strong style={{ marginLeft: '20px' }}>Logadouro:</strong><span>{nota.logadouro}</span>
+          <strong style={{ marginLeft: '20px' }}>Logradouro:</strong><span>{nota.logradouro}</span>
           <strong style={{ marginLeft: '20px' }}>Número:</strong><span>{nota.numero}</span>
           <strong style={{ marginLeft: '20px' }}>Complemento:</strong><span>{nota.complemento ? nota.complemento : '-'}</span>
         </div>
